@@ -3,14 +3,14 @@
 #include <vector>
 
 
-struct Project /*Pair?*/ //Структура Проект для класса EduDiv
+struct Project //Структура "Проект" спешл для класса-наследника EduDiv
 {
 	std::string name;
 	int price;
 };
 
-class EduDiv : //Класс EduDiv ещё не начинал толком
-	public AbsDiv
+class EduDiv :
+	public AbsDiv //Класс-наследник EduDiv - запись в базе данных формата "Образовательное учреждение"
 {
 	std::vector<Project> projVector;
 public:

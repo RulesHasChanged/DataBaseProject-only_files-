@@ -20,7 +20,7 @@ std::string EduDiv::toStringMethod() const
 		+ EduDiv::nameOfManagGet()+ "\n" 
 		+ std::to_string(EduDiv::numberOfGradStudGet()) + "\n"
 		+ std::to_string(EduDiv::numberOfEmploGet()) + "\n"
-		+ getVectorValues() + "\n";
+		+ getVectorValues();
 }
 
 void EduDiv::toCoutMethod() const
@@ -30,7 +30,7 @@ void EduDiv::toCoutMethod() const
 		+ EduDiv::nameOfManagGet() + "\n"
 		+ std::to_string(EduDiv::numberOfGradStudGet()) + "\n"
 		+ std::to_string(EduDiv::numberOfEmploGet()) + "\n"
-		+ getVectorValues() + "\n";
+		+ getVectorValues();
 }
 
 void EduDiv::addProject(const Project& proj)

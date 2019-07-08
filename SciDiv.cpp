@@ -2,7 +2,8 @@
 #include <iostream>
 
 std::string SciDiv::getMapa() const //Преобразование записи о студенте (unordered_map) в строку формата:
-                                    /*<курс>*пробел*<студенты>*пробел*<стоимость обучения>*перенос строки*/{
+                                    /*<курс>*пробел*<студенты>*пробел*<стоимость обучения>*перенос строки*/
+{
     std::string loles = std::to_string(mapa.size()) + "\n";
     for (const auto& pair : mapa)
     {
@@ -14,11 +15,12 @@ std::string SciDiv::getMapa() const //Преобразование записи 
 
 std::string SciDiv::toStringMethod() const  //Виртуалбный метод для преоброзования полей класса SciDiv в строку
 {
-    return "Science\n" + SciDiv::nameOfInstGet() + "\n"
+    return "Science\n" 
+		+ SciDiv::nameOfInstGet() + "\n"
 		+ SciDiv::nameOfManagGet()+ "\n" 
 		+ std::to_string(SciDiv::numberOfGradStudGet()) + "\n"
 		+ std::to_string(SciDiv::numberOfEmploGet()) + "\n"
-		+ getMapa() + "\n";
+		+ getMapa();
 }
 
 void SciDiv::toCoutMethod() const
@@ -26,7 +28,7 @@ void SciDiv::toCoutMethod() const
     std::cout << "Record type: " << SciDiv::toStringMethod(); 
 }
 
-int SciDiv::numberOfGradStudGet() const
+int SciDiv::numberOfGradStudGet() const //Подсчет количества студентов (в том числе и аспиров)
 {
 	int result = AbsDiv::numberOfGradStudGet();
 
@@ -38,7 +40,7 @@ int SciDiv::numberOfGradStudGet() const
 	return result;
 }
 
-void SciDiv::addGroup(int course, const SciGroup& group)
+void SciDiv::addGroup(int course, const SciGroup& group)  //Метод добавления новой группы в поле класса SciDiv
 {
 	mapa[course] = group;
 }

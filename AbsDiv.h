@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-class AbsDiv
+class AbsDiv  //Класс-родитель и матушка всех классов-записей в БД 
 {
 	std::string nameOfInstitution;
 	std::string nameOfManager;
@@ -17,7 +17,7 @@ public:
 	virtual int numberOfGradStudGet() const;
 	int numberOfEmploGet()const;
 	virtual std::string toStringMethod() const = 0;
-    virtual void toCoutMethod() const = 0; // Не доделано
+    virtual void toCoutMethod() const = 0;
 	AbsDiv();
 	~AbsDiv();
 };

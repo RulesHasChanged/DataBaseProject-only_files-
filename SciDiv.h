@@ -3,14 +3,14 @@
 #include <unordered_map>
 
 
-struct SciGroup //Структура для класса SciDiv
+struct SciGroup //Структура "Количество студентов - цена обучения" для класса SciDiv
 {
 	int students;
 	int price;
 };
 
 class SciDiv :
-	public AbsDiv
+	public AbsDiv  //Класс - запись в БД формата "Научное учреждение"
 {
 	std::unordered_map<int, SciGroup> mapa;
 public:
