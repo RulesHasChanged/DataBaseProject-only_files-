@@ -23,6 +23,22 @@ DataBase::DataBase(const std::vector <AbsDiv*>& vector)/* Копирование
 	}
 }
 
+DataBase::DataBase(const std::vector <AbsDiv*>& vector, std::string name)
+	:nameOfDataBase(name)
+{
+	for (AbsDiv* div : vector)
+	{
+		auto edu = dynamic_cast <EduDiv*> (div);
+
+		if (edu == NULL)
+		{
+			auto sci = dynamic_cast <SciDiv*> (div);
+			mainVector.push_back(new SciDiv(*sci));
+		}
+		else
+			mainVector.push_back(new EduDiv(*edu));
+	}
+}
 
 DataBase::DataBase(std::string name)
 	: nameOfDataBase(name)
@@ -107,7 +123,7 @@ void DataBase::saveCurrent() const
 	std::ofstream f_stream;
 	f_stream.open(nameOfDataBase + ".txt");
 
-	f_stream << mainVector.size() + "\n";
+	f_stream << std::to_string(mainVector.size()) + "\n";
 
 	for (AbsDiv* div : mainVector)
 	{
@@ -140,12 +156,10 @@ DataBase::~DataBase()
 	}
 }
 
-DataBase DataBase::fromFile(const std::string& fileName)
+void DataBase::fromFile(const std::string& fileName)
 {
 	std::ifstream f_stream;
 	f_stream.open(fileName + ".txt");
-
-	DataBase DB = DataBase(fileName);
 
 	int size;
 	f_stream >> size;
@@ -159,11 +173,11 @@ DataBase DataBase::fromFile(const std::string& fileName)
 		std::string name = ToolGetline(f_stream);
 		std::string manage = ToolGetline(f_stream);
 		int numberOfGrad;
-		std::cin >> numberOfGrad;
+		f_stream >> numberOfGrad;
 		int numberOfEmplo;
-		std::cin >> numberOfEmplo;
+		f_stream >> numberOfEmplo;
 
-		if (string == "Education\n")
+		if (string == "Education")
 		{
 			EduDiv* ED = new EduDiv;
 
@@ -173,14 +187,14 @@ DataBase DataBase::fromFile(const std::string& fileName)
 			ED->numberOfEmploSet(numberOfEmplo);
 
 			int numba;
-			std::cin >> numba;
+			f_stream >> numba;
 
 			for (int k = 0; k < numba; k++)
 			{
 				std::string name;
 				int price;
-				std::cin >> name;
-				std::cin >> price;
+				f_stream >> name;
+				f_stream >> price;
 				
 				Project proj;
 				proj.name = name;
@@ -189,7 +203,7 @@ DataBase DataBase::fromFile(const std::string& fileName)
 				ED->addProject(proj);
 			}
 
-			DB.addDivision(ED);
+			mainVector.push_back(ED);
 		}
 		else
 		{
@@ -201,16 +215,16 @@ DataBase DataBase::fromFile(const std::string& fileName)
 			SD->numberOfEmploSet(numberOfEmplo);
 
 			int numba;
-			std::cin >> numba;
+			f_stream >> numba;
 
 			for (int k = 0; k < numba; k++)
 			{
 				int course;
-				std::cin >> course;
+				f_stream >> course;
 				int price;
 				int students;
-				std::cin >> price;
-				std::cin >> students;
+				f_stream >> price;
+				f_stream >> students;
 
 				SciGroup group;
 
@@ -220,9 +234,7 @@ DataBase DataBase::fromFile(const std::string& fileName)
 				SD->addGroup(course, group);
 			}
 
-			DB.addDivision(SD);
+			mainVector.push_back(SD);
 		}
 	}
-
-	return DB;
 }

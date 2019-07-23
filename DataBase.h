@@ -21,6 +21,7 @@ public:
 	DataBase() = default;
 	DataBase(std::string name);
 	DataBase(const std::vector <AbsDiv*>& vector);
+	DataBase(const std::vector <AbsDiv*>& vector, std::string name);
 	~DataBase();
-	static DataBase fromFile(const std::string& fileName);
+	void fromFile(const std::string& fileName);
 };
